@@ -75,9 +75,11 @@ body {
 }
 
 .minutes-container {
-    animation: rotate 3600s infinite linear;
+    /* animation: rotate 3600s infinite steps(60); */
+    transition: transform 0.3s cubic-bezier(0.4, 2.08, 0.55, 0.44);
 }
 
 .seconds-container {
-    animation: rotate 60s infinite steps(60);
+    /* animation: rotate 60s infinite steps(60); */
+    transition: transform 0.2s cubic-bezier(0.4, 2.08, 0.55, 0.44);
 }
