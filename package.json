@@ -1,0 +1,19 @@
+{
+  "name": "clock-speed",
+  "version": "1.0.0",
+  "description": "Change this clocks speed for use as an excuse for tardiness of any length.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/connorleee/clock-speed.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/connorleee/clock-speed/issues"
+  },
+  "homepage": "https://github.com/connorleee/clock-speed#readme"
+}
