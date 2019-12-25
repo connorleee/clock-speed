@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>Clock Speed</h1>
+      <h1>Clock Work</h1>
       <Clock/>
     </div>
   );
