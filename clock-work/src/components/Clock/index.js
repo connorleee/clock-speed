@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Clock extends Component {
     state = {
-        timeScaleMultiplier: 0.001
+        timeScaleMultiplier: 0.75
     };
 
     componentDidMount = () => {
@@ -37,13 +37,16 @@ class Clock extends Component {
         // Loop through each hand and set the angle
         for (let j = 0; j < hands.length; j++) {
             let elements = document.querySelectorAll("." + hands[j].hand);
-            console.log(elements)
             for (let k = 0; k < elements.length; k++) {
                 elements[k].style.webkitTransform = 'rotateZ(' + hands[j].angle + 'deg';
                 elements[k].style.transform = 'rotateZ(' + hands[j].angle + 'deg)';
 
                 if (hands[j].hand === 'minutes') {
                     elements[k].parentNode.setAttribute('data-second-angle', hands[j + 1].angle);
+                }
+
+                if (hands[j].hand === 'hours') {
+                    elements[k].parentNode.setAttribute('data-minute-angle', hands[j + 1].angle);
                 }
             }
         }
@@ -68,9 +71,9 @@ class Clock extends Component {
         setInterval(() => {
             for (let i = 0; i < containers.length; i++) {
                 if (containers[i].angle === undefined) {
-                    containers[i].angle = 12;
+                    containers[i].angle = 1;
                 } else {
-                    containers[i].angle += 6;
+                    containers[i].angle += 0.5; //hour hand moves 0.5 degrees per minute
                 }
                 containers[i].style.webkitTransform = 'rotateZ(' + containers[i].angle + 'deg)';
                 containers[i].style.transform = 'rotateZ(' + containers[i].angle + 'deg)';

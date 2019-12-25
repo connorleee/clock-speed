@@ -67,7 +67,8 @@
 }
 
 .hours-container {
-  animation: rotate 43200s infinite linear;
+  /* animation: rotate 43200s infinite linear; */
+  transition: transform 0.4s cubic-bezier(0.4, 1.08, 0.55, 0.44);
 }
 
 .minutes-container {
