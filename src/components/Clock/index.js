@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Clock extends Component {
     state = {
-        timeScaleMultiplier: 0.75
+        timeScaleMultiplier: 0.001
     };
 
     componentDidMount = () => {
