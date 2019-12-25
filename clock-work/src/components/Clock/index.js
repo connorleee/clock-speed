@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
 class Clock extends Component {
-    
+    state = {
+        timeScaleMultiplier: 0.001
+    };
+
     componentDidMount = () => {
         this.initLocalClocks();
         this.setUpMinuteHands();
+        this.setUpHourHands();
         this.moveSecondHands();
     }
 
@@ -45,12 +49,41 @@ class Clock extends Component {
         }
     }
 
+    setUpHourHands = () => {
+        let containers = document.querySelectorAll('.hours-container');
+        let minuteAngle = containers[0].getAttribute('data-minute-angle');
+        if (minuteAngle > 0) {
+            let delay = (((360 - minuteAngle) / 6) + 0.1) * 1000 * this.state.timeScaleMultiplier;
+            setTimeout(() => {
+                this.moveHourHands(containers);
+            }, delay);
+        }
+    }
+
+    moveHourHands = (containers) => {
+        for (let i = 0; i < containers.length; i++) {
+            containers[i].style.webkitTransform = 'rotateZ(6deg)';
+            containers[i].style.transform = 'rotateZ(6deg)';
+        }
+        setInterval(() => {
+            for (let i = 0; i < containers.length; i++) {
+                if (containers[i].angle === undefined) {
+                    containers[i].angle = 12;
+                } else {
+                    containers[i].angle += 6;
+                }
+                containers[i].style.webkitTransform = 'rotateZ(' + containers[i].angle + 'deg)';
+                containers[i].style.transform = 'rotateZ(' + containers[i].angle + 'deg)';
+            }
+        }, 60000 * this.state.timeScaleMultiplier);
+    }
+
     setUpMinuteHands = () => {
         let containers = document.querySelectorAll('.minutes-container');
         let secondAngle = containers[0].getAttribute('data-second-angle');
         if (secondAngle > 0) {
-            let delay = (((360 - secondAngle) / 6) + 0.1) * 1000;
-            setTimeout(function () {
+            let delay = (((360 - secondAngle) / 6) + 0.1) * 1000 * this.state.timeScaleMultiplier;
+            setTimeout(() => {
                 this.moveMinuteHands(containers);
             }, delay);
         }
@@ -61,7 +94,7 @@ class Clock extends Component {
             containers[i].style.webkitTransform = 'rotateZ(6deg)';
             containers[i].style.transform = 'rotateZ(6deg)';
         }
-        setInterval(function () {
+        setInterval(() => {
             for (let i = 0; i < containers.length; i++) {
                 if (containers[i].angle === undefined) {
                     containers[i].angle = 12;
@@ -71,12 +104,12 @@ class Clock extends Component {
                 containers[i].style.webkitTransform = 'rotateZ(' + containers[i].angle + 'deg)';
                 containers[i].style.transform = 'rotateZ(' + containers[i].angle + 'deg)';
             }
-        }, 60000);
+        }, 60000 * this.state.timeScaleMultiplier);
     }
 
     moveSecondHands = () => {
         var containers = document.querySelectorAll('.seconds-container');
-        setInterval(function () {
+        setInterval(() => {
             for (var i = 0; i < containers.length; i++) {
                 if (containers[i].angle === undefined) {
                     containers[i].angle = 6;
@@ -86,7 +119,7 @@ class Clock extends Component {
                 containers[i].style.webkitTransform = 'rotateZ(' + containers[i].angle + 'deg)';
                 containers[i].style.transform = 'rotateZ(' + containers[i].angle + 'deg)';
             }
-        }, 1000);
+        }, 1000 * this.state.timeScaleMultiplier);
     }
 
     render() {
